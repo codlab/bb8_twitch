@@ -1,0 +1,16 @@
+{
+  "name": "bb8_twitch",
+  "version": "1.0.0",
+  "description": "A simple BB8 Interaction",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "codlab",
+  "license": "ISC",
+  "private": true,
+  "dependencies": {
+    "noble": "^1.5.0",
+    "sphero": "^0.9.2"
+  }
+}
