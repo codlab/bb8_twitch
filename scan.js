@@ -1,11 +1,19 @@
 var noble = require("noble");
-var bb8 = require("./bb8");
+
+var BB8_MATCH = /BB-*/;
 
 var _can_start = false;
 var _waiting = false;
 var found_devices = [];
 var _callback = function(peripheral){
   //nothing here
+}
+
+
+
+function isBB8(peripheral) {
+  return peripheral && peripheral.advertisement
+  && BB8_MATCH.test(peripheral.advertisement.localName);
 }
 
 function attemptStart() {
@@ -33,19 +41,22 @@ noble.on('stateChange', function(state) {
 
 noble.on('discover', function callback(peripheral){
   if(peripheral && !has(found_devices, peripheral)){
+    peripheral.once('connect', function(){});
     peripheral.address = peripheral._noble.address;
     found_devices.push(peripheral);
 
-    if(bb8.isBB8(peripheral)){
-      _callback(peripheral);
-
+    if(isBB8(peripheral)){
       noble.stopScanning();
+      setTimeout(function (){
+        _callback(peripheral);
+      },200);
     }
   }
 });
 
 module.exports = {
   connect: function() {
+    found_devices = [];
     _waiting = true;
     attemptStart();
   },

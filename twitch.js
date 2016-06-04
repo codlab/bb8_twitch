@@ -20,16 +20,17 @@ client.on("subscription", function (channel, username) {
   console.log("subscription from "+channel+" "+username)
 });
 
-
-client.api({
-    url: "https://api.twitch.tv/kraken/channels/"+config.channel_name+"/follows"
-}, function(err, res, body) {
-    body = JSON.parse(body);
-    console.log(typeof body);
-});
-
 module.exports = {
   connect: function(){
     client.connect();
-  }
+
+    setInterval(function() {
+      client.api({
+          url: "https://api.twitch.tv/kraken/channels/"+config.channel_name+"/follows"
+      }, function(err, res, body) {
+          body = JSON.parse(body);
+          console.log("followers := "+body.follows.length);
+      });
+    }, 30000);
+  },
 }
