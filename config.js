@@ -11,6 +11,7 @@ module.exports = {
       username: "username",
       password: "oauth:token"
     },
-    channels: ["#username"]
+    channels: ["#username"],
+    channel_name: "username"
   }
 }
