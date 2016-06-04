@@ -1,6 +1,7 @@
 var noble = require("noble");
 var bb8 = require("./bb8");
-
+var config = require("./config");
+var irc = require("tmi.js");
 
 var found_devices = [];
 
@@ -26,9 +27,27 @@ noble.on('discover', function callback(peripheral){
     found_devices.push(peripheral);
 
     if(bb8.isBB8(peripheral)){
-      found_devices = [];
       noble.stopScanning();
-      bb8.startBB8(peripheral);
+      setTimeout(function(){
+        console.log("having peripheral "+peripheral.address);
+        bb8.startBB8(peripheral);
+      }, 1000);
     }
   }
 });
+
+var client = new irc.client(config.tmi_options);
+
+client.connect();
+
+
+/*var sphero = require("sphero"),
+    bb8 = sphero("64fa5da6bb0f40f6ac90543d56d1e596"); // change BLE address accordingly
+
+bb8.connect(function() {
+  // roll BB-8 in a random direction, changing direction every second
+  setInterval(function() {
+    var direction = Math.floor(Math.random() * 360);
+    bb8.roll(150, direction);
+  }, 1000);
+});*/
