@@ -28,7 +28,7 @@ if (cluster.isWorker) {
   }
 
   scan.addOnPeripheral(function (peripheral) {
-    console.log("having peripheral "+peripheral.address);
+    console.log("having peripheral", peripheral.address);
     var bb8 = new BB8();
 
     bb8.on("connecting",function(){

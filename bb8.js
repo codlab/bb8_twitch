@@ -61,7 +61,7 @@ BB8.prototype.startBB8 = function(peripheral) {
   });
 
   setTimeout(function(){
-    console.log("connected ? "+connected);
+    console.log("connected ?", connected);
     if(connected == false){
       instance.emit("timeout", peripheral);
       bb8_device.disconnect(function(){
