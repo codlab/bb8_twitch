@@ -8,12 +8,12 @@ client.on("roomstate", function (channel, state) {
   console.log("roomstate from "+channel+" "+state);
 });
 
-client.on("join", function (channel, username) {
   console.log("user logged on "+channel+" "+username);
+client.on("join", function (channel, username, self) {
 });
 
-client.on("subanniversary", function (channel, username, months) {
   console.log("subanniversary from "+channel+" "+username+" "+months)
+client.on("resub", function (channel, username, months) {
 });
 
 client.on("subscription", function (channel, username) {
@@ -28,7 +28,6 @@ module.exports = {
       client.api({
           url: "https://api.twitch.tv/kraken/channels/"+config.channel_name+"/follows"
       }, function(err, res, body) {
-          body = JSON.parse(body);
           console.log("followers := "+body.follows.length);
       });
     }, 30000);
