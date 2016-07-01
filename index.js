@@ -1,7 +1,7 @@
 var BB8 = require("./bb8");
 var twitch = require("./twitch")
 var scan = require("./scan")
-var cluster = require('cluster');
+var cluster = require("cluster");
 
 
 
@@ -9,7 +9,7 @@ if (cluster.isMaster) {
   //init fork
   cluster.fork({forked : 0});
 
-  cluster.on('exit', function(worker, code, signal) {
+  cluster.on("exit", function(worker, code, signal) {
     //next forks
     cluster.fork({forked : 1 });
   });

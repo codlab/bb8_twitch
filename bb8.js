@@ -1,5 +1,5 @@
-var util = require('util');
-var EventEmitter = require('events').EventEmitter;
+var util = require("util");
+var EventEmitter = require("events").EventEmitter;
 var sphero = require("sphero");
 
 var instance = undefined;

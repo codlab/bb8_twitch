@@ -30,8 +30,8 @@ function has(array, peripheral){
   return filter.length > 0;
 }
 
-noble.on('stateChange', function(state) {
-  if (state === 'poweredOn') {
+noble.on("stateChange", function(state) {
+  if (state === "poweredOn") {
     _can_start = true;
     attemptStart();
   }else{
@@ -39,9 +39,9 @@ noble.on('stateChange', function(state) {
   }
 });
 
-noble.on('discover', function callback(peripheral){
+noble.on("discover", function callback(peripheral){
   if(peripheral && !has(found_devices, peripheral)){
-    peripheral.once('connect', function(){});
+    peripheral.once("connect", function(){});
     peripheral.address = peripheral._noble.address;
     found_devices.push(peripheral);
 
