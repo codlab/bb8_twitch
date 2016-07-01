@@ -4,7 +4,6 @@ module.exports = {
       debug: true
     },
     connection: {
-      cluster: "aws",
       reconnect: true
     },
     identity: {
