@@ -31,5 +31,5 @@ module.exports = {
           console.log("followers :=", body.follows.length);
       });
     }, 30000);
-  },
-}
+  }
+};

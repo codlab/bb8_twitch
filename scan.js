@@ -63,4 +63,4 @@ module.exports = {
   addOnPeripheral: function(callback) {
     _callback = callback;
   }
-}
+};

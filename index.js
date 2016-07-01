@@ -1,6 +1,6 @@
 var BB8 = require("./bb8");
-var twitch = require("./twitch")
-var scan = require("./scan")
+var twitch = require("./twitch");
+var scan = require("./scan");
 var cluster = require("cluster");
 
 
@@ -60,5 +60,5 @@ if (cluster.isWorker) {
     bb8.startBB8(peripheral);
   });
 
-  scan.connect()
+  scan.connect();
 }
