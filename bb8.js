@@ -5,13 +5,13 @@ var sphero = require("sphero");
 var instance = undefined;
 var connected = false;
 
-function error_callback(data, err){
+function error_callback(data, err) {
   if(instance) {
     instance.errorListener(data, err);
   }
 }
 
-function BB8(){
+function BB8() {
   this.peripheral = undefined;
   connected = false;
 }
@@ -19,15 +19,15 @@ function BB8(){
 BB8.prototype.roll = function(device) {
   device.roll(50, 0);
 
-  setTimeout(function(){
+  setTimeout(function() {
     device.roll(50, 180);
-    setTimeout(function(){
+    setTimeout(function() {
       device.roll(550, 270);
     }, 300);
   }, 300);
 }
 
-BB8.prototype.errorListener = function(err, data){
+BB8.prototype.errorListener = function(err, data) {
   var peripheral = this.peripheral;
   if(peripheral == undefined) return;
 
@@ -35,7 +35,7 @@ BB8.prototype.errorListener = function(err, data){
   console.log(data);
 
   this.emit("error", peripheral);
-  peripheral.disconnect(function(){
+  peripheral.disconnect(function() {
     console.log("disconnected due to error");
   });
 
@@ -60,11 +60,11 @@ BB8.prototype.startBB8 = function(peripheral) {
     }, 2000);
   });
 
-  setTimeout(function(){
+  setTimeout(function() {
     console.log("connected ?", connected);
     if(connected == false){
       instance.emit("timeout", peripheral);
-      bb8_device.disconnect(function(){
+      bb8_device.disconnect(function() {
         console.log("disconnected");
       });
       bb8_device.removeListener("error", error_callback);

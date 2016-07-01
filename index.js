@@ -20,28 +20,28 @@ if (cluster.isWorker) {
   var forked = process.env && process.env.forked ? process.env.forked : 1;
   var count_error = 0;
 
-  function checkError(){
+  function checkError() {
     if(count_error > 3 || process.env.forked == 0) {
       console.log("closing");
       process.exit(1);
     }
   }
 
-  scan.addOnPeripheral(function (peripheral) {
+  scan.addOnPeripheral(function(peripheral) {
     console.log("having peripheral", peripheral.address);
     var bb8 = new BB8();
 
-    bb8.on("connecting",function(){
+    bb8.on("connecting",function() {
       console.log("connecting");
     })
 
-    bb8.on("connected", function(){
+    bb8.on("connected", function() {
       console.log("connected");
 
       twitch.connect();
     });
 
-    bb8.on("error", function(){
+    bb8.on("error", function() {
       console.log("error");
       scan.connect();
 
@@ -49,7 +49,7 @@ if (cluster.isWorker) {
       checkError();
     });
 
-    bb8.on("timeout", function(){
+    bb8.on("timeout", function() {
       console.log("timeout");
       scan.connect();
 

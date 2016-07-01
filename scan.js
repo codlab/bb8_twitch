@@ -5,7 +5,7 @@ var BB8_MATCH = /BB-*/;
 var _can_start = false;
 var _waiting = false;
 var found_devices = [];
-var _callback = function(peripheral){
+var _callback = function(peripheral) {
   //nothing here
 }
 
@@ -18,7 +18,7 @@ function isBB8(peripheral) {
 
 function attemptStart() {
   if(_can_start && _waiting){
-    noble.startScanning([], true, function(error){
+    noble.startScanning([], true, function(error) {
       if(error) noble.stopScanning();
     });
   }
@@ -41,13 +41,13 @@ noble.on("stateChange", function(state) {
 
 noble.on("discover", function callback(peripheral){
   if(peripheral && !has(found_devices, peripheral)){
-    peripheral.once("connect", function(){});
+    peripheral.once("connect", function() {});
     peripheral.address = peripheral._noble.address;
     found_devices.push(peripheral);
 
     if(isBB8(peripheral)){
       noble.stopScanning();
-      setTimeout(function (){
+      setTimeout(function() {
         _callback(peripheral);
       },200);
     }
